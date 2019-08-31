@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CRUDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CRUD.dbo.AuditLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="AuditLog">
+    <Key>
+      <PropertyRef Name="MemberId" />
+    </Key>
+    <Property Name="Time" Type="datetime" />
+    <Property Name="Action" Type="varchar" MaxLength="200" />
+    <Property Name="MemberId" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'CRUD.dbo.Member' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberId" />
+      <PropertyRef Name="Status" />
+    </Key>
+    <Property Name="MemberId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="CRUDModelStoreContainer">
+    <EntitySet Name="AuditLog" EntityType="Self.AuditLog" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AuditLog].[Time] AS [Time], 
+    [AuditLog].[Action] AS [Action], 
+    [AuditLog].[MemberId] AS [MemberId]
+    FROM [dbo].[AuditLog] AS [AuditLog]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Member" EntityType="Self.Member" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Member].[MemberId] AS [MemberId], 
+    [Member].[FirstName] AS [FirstName], 
+    [Member].[LastName] AS [LastName], 
+    [Member].[EmailAddress] AS [EmailAddress], 
+    [Member].[Password] AS [Password], 
+    [Member].[Status] AS [Status]
+    FROM [dbo].[Member] AS [Member]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

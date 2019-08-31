@@ -1,0 +1,42 @@
+﻿<Window x:Class="MemberAppClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MemberAppClient"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="0,0,0,-1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.939*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Members Data" HorizontalAlignment="Center" VerticalAlignment="Center" Height="383" Margin="5,5,5,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="5,5,5,5">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                            <DataGrid x:Name="dg1" ItemsSource="{Binding Members}" SelectedItem="{Binding SelectedEmployee}"  CanUserDeleteRows="False" SelectionMode="Single" SelectedIndex="{Binding SelectedIndex}" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,5,5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Emp ID" Binding="{Binding Path=ID}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="EmailId" Binding="{Binding Path=MailId}"></DataGridTextColumn>
+                                    <DataGridCheckBoxColumn Header="Status" Binding="{Binding Path=Status}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <Button  Content="Add Member" Command="{Binding AddUserCommand}" Margin="5" Focusable="False" HorizontalAlignment="Left" MinWidth="200"/>
+                    <Button Content="Get Data" Command="{Binding SaveCommand}" Margin="5" Focusable="False" HorizontalAlignment="Left" MinWidth="200"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
